@@ -16,6 +16,9 @@ public class PlayerMovement : MonoBehaviour
     private Animator anim;
     private float _movement;
     private SpriteRenderer sprt;
+    [SerializeField] private Vector2 _boxOffset;
+    [SerializeField] private Vector2 _boxSize;
+    [SerializeField] private LayerMask _boxLayer;
 
     void Awake()
     {
@@ -52,7 +55,9 @@ public class PlayerMovement : MonoBehaviour
  
     public void Jump(InputAction.CallbackContext ctx)
     {
-        if (ctx.ReadValue<float>() == 1)
+
+        if (ctx.canceled || !IsGrounded())
+            return;
 
         {
 
@@ -61,14 +66,21 @@ public class PlayerMovement : MonoBehaviour
             anim.SetTrigger("Jump");
         }
     }
-  public void Attack(InputAction.CallbackContext ctx)
+    public void Attack(InputAction.CallbackContext ctx)
     {
         if (ctx.ReadValue<float>() == 1)
         {
             anim.SetTrigger("Attack");
         }
-        
     }
+        private bool IsGrounded()
+        {
+        //Check for ground
+        RaycastHit2D hit = Physics2D.BoxCast(transform.position + (Vector3)_boxOffset, _boxSize, 0, Vector2.zero, 0, _boxLayer);
+        
+
+        return hit;
+        }
 
 
     private void OnCollisionEnter2D(Collision2D collision)
