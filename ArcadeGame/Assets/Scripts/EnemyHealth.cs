@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class EnemyHealth : MonoBehaviour
 {
-    public int health = 100;
+    public int health = 50;
     public GameObject deathEffect;
 
     public void TakeDamage(int damage)

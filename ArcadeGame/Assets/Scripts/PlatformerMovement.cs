@@ -11,7 +11,6 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed;
     public float jumpHeight;
 
-
     public Rigidbody2D rb2d;
     private Animator anim;
     private float _movement;
@@ -47,9 +46,9 @@ public class PlayerMovement : MonoBehaviour
         _movement = ctx.ReadValue<Vector2>().x * moveSpeed;
         
         if (_movement < 0)
-            sprt.flipX = true;
+            transform.rotation = UnityEngine.Quaternion.Euler(0f, 180f, 0f);
         else if (_movement > 0)
-            sprt.flipX = false;
+            transform.rotation = UnityEngine.Quaternion.Euler(0f, 0f, 0f);
     }
 
  

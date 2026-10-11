@@ -2,15 +2,17 @@ using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class EnemyMovement : MonoBehaviour
+public class Enemy : MonoBehaviour
 {
     public float speed;
     public GameObject target;
     private float distance;
     
+    
  private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.TryGetComponent(out Rigidbody2D rgbd))
+        if (collision.gameObject.CompareTag("Player"))
+
        
         SceneManager.LoadScene("DeathScreen");
     }
